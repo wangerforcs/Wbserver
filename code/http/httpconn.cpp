@@ -102,7 +102,7 @@ bool HttpConn::process() {
         return false;
     }
     else if(request_.parse(readBuff_)) {
-        LOG_DEBUG("[%s], [%s], [%s]", request_.method().c_str(), request_.path().c_str(), request_.version().c_str());
+        LOG_DEBUG("[confd %d] [%s], [%s], [%s] [keepalive %d]", fd_, request_.method().c_str(), request_.path().c_str(), request_.version().c_str(), request_.IsKeepAlive());
         response_.Init(srcDir, request_.path(), request_.IsKeepAlive(), 200);
     } else {
         return false;
