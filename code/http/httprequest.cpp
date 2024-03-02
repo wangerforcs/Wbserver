@@ -133,7 +133,7 @@ void HttpRequest::ParsePost_() {
         ParseFromUrlencoded_();
         if(DEFAULT_HTML_TAG.count(path_)) {
             int tag = DEFAULT_HTML_TAG.find(path_)->second;
-            LOG_DEBUG("Tag:%d", tag);
+            LOG_DEBUG("Tag:%d [0 for register 1 for login]", tag);
             if(tag == 0 || tag == 1) {
                 bool isLogin = (tag == 1);
                 if(UserVerify(post_["username"], post_["password"], isLogin)) {
@@ -187,7 +187,6 @@ void HttpRequest::ParseFromUrlencoded_() {
     if(post_.count(key) == 0 && j < i) {
         value = body_.substr(j, i - j);
         post_[key] = value;
-        LOG_DEBUG("%s = %s", key.c_str(), value.c_str());
     }
 }
 
