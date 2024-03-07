@@ -12,14 +12,16 @@
 #include <queue>
 #include <thread>
 #include <functional>
+#include <iostream>
 class ThreadPool {
 public:
     explicit ThreadPool(size_t threadCount = 8): pool_(std::make_shared<Pool>()) {
             assert(threadCount > 0);
             for(size_t i = 0; i < threadCount; i++) {
                 std::thread([pool = pool_] {
-                    std::unique_lock<std::mutex> locker(pool->mtx);
+                    // std::cout << std::this_thread:: get_id () << std::endl;
                     while(true) {
+                        std::unique_lock<std::mutex> locker(pool->mtx);
                         if(!pool->tasks.empty()) {
                             auto task = std::move(pool->tasks.front());
                             pool->tasks.pop();
