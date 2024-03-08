@@ -132,7 +132,7 @@ void Log::write(int level, const char *format, ...) {
         va_end(vaList);
 
         buff_.HasWritten(m);
-        buff_.Append("\n\0", 2);
+        buff_.Append("\n", 1);
 
         if(isAsync_ && deque_ && !deque_->full()) {
             deque_->push_back(buff_.RetrieveAllToStr());
