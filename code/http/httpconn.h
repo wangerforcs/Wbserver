@@ -1,16 +1,10 @@
-/*
- * @Author       : mark
- * @Date         : 2020-06-15
- * @copyleft Apache 2.0
- */ 
-
 #ifndef HTTP_CONN_H
 #define HTTP_CONN_H
 
 #include <sys/types.h>
-#include <sys/uio.h>     // readv/writev
-#include <arpa/inet.h>   // sockaddr_in
-#include <stdlib.h>      // atoi()
+#include <sys/uio.h>     
+#include <arpa/inet.h>  
+#include <stdlib.h>
 #include <errno.h>      
 
 #include "../log/log.h"
