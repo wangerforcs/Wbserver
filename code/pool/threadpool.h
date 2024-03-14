@@ -35,13 +35,11 @@ public:
     ThreadPool(ThreadPool&&) = default;
     
     ~ThreadPool() {
-        if(static_cast<bool>(pool_)) {
-            {
-                std::lock_guard<std::mutex> locker(pool_->mtx);
-                pool_->isClosed = true;
-            }
-            pool_->cond.notify_all();
+        {
+            std::lock_guard<std::mutex> locker(pool_->mtx);
+            pool_->isClosed = true;
         }
+        pool_->cond.notify_all();
     }
 
     template<class F>
