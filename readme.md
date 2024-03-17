@@ -2,22 +2,12 @@
 
 ```
 .
-├── bin
-├── code
-│   ├── buffer
-│   ├── http
-│   ├── log
-│   ├── pool
-│   ├── server
-│   └── timer
-├── log
-├── resources
-│   ├── css
-│   ├── fonts
-│   ├── images
-│   ├── js
-│   └── video
-└── webbench-1.5
+├── bin 编译产生的.o文件
+├── include 头文件
+├── src 源文件
+├── log 日志文件
+├── resources 静态资源
+└── webbench-1.5 压力测试工具
 ```
 
 ## 功能
