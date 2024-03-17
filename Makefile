@@ -1,22 +1,22 @@
-CXX = g++
-TARGET = server
-CFLAGS = -std=c++14 -O2 -Wall -g
-LIBS = -pthread -lmysqlclient
+CXX=g++
+TARGET=server
+INCLUDE=include
+CFLAGS=-std=c++14 -O2 -Wall -g -I $(INCLUDE)
+LIBS=-pthread -lmysqlclient
 
-SRCDIR = ./code 
-SRC = $(shell find $(SRCDIR) -name "*.cpp")
-DESDIR = ./bin
-# OBJS = $(addprefix $(DESTDIR)/, $(notdir $(SRC:.cpp=.o)))
-OBJS = $(patsubst  %.cpp, $(DESDIR)/%.o, $(notdir $(SRC)))
+SRCDIR=src
+BINDIR=bin
+SRC=$(wildcard $(SRCDIR)/*.cpp)
+SRC+=main.cpp
+OBJS=$(patsubst %.cpp, $(BINDIR)/%.o, $(notdir $(SRC)))
 
-SOURSE_DIR = $(dir $(SRC))
-vpath %.cpp $(SOURSE_DIR)
+vpath %.cpp $(SRCDIR)
 
 $(TARGET): $(OBJS)
-	$(CXX) $(CFLAGS) $(OBJS) -o $@ $(LIBS)
+	$(CXX) $(CFLAGS) $(OBJS) -o $(TARGET) $(LIBS)
 
-$(DESDIR)/%.o: %.cpp
-	$(CXX) -c $< -o $@ $(LIBS)
+$(BINDIR)/%.o: %.cpp
+	$(CXX) -c $< $(CFLAGS) -o $@ $(LIBS)
 
 .PHONY: clean
 clean:

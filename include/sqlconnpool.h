@@ -7,7 +7,7 @@
 #include <mutex>
 #include <semaphore.h>
 #include <thread>
-#include "../log/log.h"
+#include "log.h"
 
 class SqlConnPool {
 public:

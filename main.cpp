@@ -1,5 +1,5 @@
 #include <unistd.h>
-#include "server/webserver.h"
+#include "webserver.h"
 
 int main() {
     WebServer server(

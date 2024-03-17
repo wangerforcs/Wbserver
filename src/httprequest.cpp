@@ -100,7 +100,7 @@ void HttpRequest::ParseHeader_(const string& line) {
 
 void HttpRequest::ParseBody_(Buffer &buff) {
     if(header_.count("Content-Length")) {
-        int len = stoi(header_["Content-Length"]);
+        size_t len = stoi(header_["Content-Length"]);
         LOG_DEBUG("Content-Length: %d", len);
         if(buff.ReadableBytes() >= len) {
             body_ = string(buff.Peek(), len);

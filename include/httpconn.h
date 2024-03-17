@@ -7,9 +7,9 @@
 #include <stdlib.h>
 #include <errno.h>      
 
-#include "../log/log.h"
-#include "../pool/sqlconnRAII.h"
-#include "../buffer/buffer.h"
+#include "log.h"
+#include "sqlconnRAII.h"
+#include "buffer.h"
 #include "httprequest.h"
 #include "httpresponse.h"
 

@@ -55,7 +55,6 @@ int HttpConn::GetPort() const {
 
 ssize_t HttpConn::read(int* saveErrno) {
     ssize_t len = -1;
-    char* buf = readBuff_.BeginWrite();
     do {
         len = readBuff_.ReadFd(fd_, saveErrno);
         if (len <= 0) {
