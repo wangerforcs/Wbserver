@@ -27,7 +27,7 @@ bool HttpRequest::parse(Buffer& buff) {
     if(buff.ReadableBytes() <= 0) {
         return false;
     }
-    // LOG_DEBUG("[state = %d]", state_)
+    LOG_DEBUG("[state = %d]", state_)
     while(state_ != FINISH) {
         if(buff.ReadableBytes() <= 0 && state_ != BODY) { return false;}
         const char* lineEnd = search(buff.Peek(), buff.BeginWriteConst(), CRLF, CRLF + 2);
@@ -36,6 +36,7 @@ bool HttpRequest::parse(Buffer& buff) {
         {
         case REQUEST_LINE:
             if(!ParseRequestLine_(line)) {
+                buff.RetrieveUntil(lineEnd + 2);
                 return false;
             }
             ParsePath_();
@@ -193,7 +194,7 @@ bool HttpRequest::UserVerify(const string &name, const string &pwd, bool isLogin
     if(name == "" || pwd == "") { return false; }
     LOG_INFO("Verify name:%s pwd:%s", name.c_str(), pwd.c_str());
     MYSQL* sql;
-    SqlConnRAII(&sql,  SqlConnPool::Instance());
+    SqlConnRAII raii(&sql,  SqlConnPool::Instance());
     assert(sql);
     
     bool flag = false;
@@ -245,7 +246,7 @@ bool HttpRequest::UserVerify(const string &name, const string &pwd, bool isLogin
         }
         flag = true;
     }
-    SqlConnPool::Instance()->FreeConn(sql);
+    // SqlConnPool::Instance()->FreeConn(sql);
     LOG_DEBUG( "UserVerify success!!");
     return flag;
 }
