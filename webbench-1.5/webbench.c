@@ -9,7 +9,7 @@
  *   webbench --help
  *
  * Return codes:
- *    0 - sucess
+ *    0 - success
  *    1 - benchmark failed (server is not on-line)
  *    2 - bad param
  *    3 - internal error, fork failed
@@ -386,7 +386,7 @@ static int bench(void)
 	  }
 	  fclose(f);
 
-  printf("\nSpeed=%d pages/min, %d bytes/sec.\nRequests: %d susceed, %d failed.\n",
+  printf("\nSpeed=%d pages/min, %d bytes/sec.\nRequests: %d succeed, %d failed.\n",
 		  (int)((speed+failed)/(benchtime/60.0f)),
 		  (int)(bytes/(float)benchtime),
 		  speed,

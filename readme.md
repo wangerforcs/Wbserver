@@ -96,3 +96,8 @@ INSERT INTO user(username, password) VALUES('name', 'password');
 
 ## 参考
 Linux高性能服务器编程，游双著.
+
+
+GET /index.html HTTP/1.1
+Connection: keep-alive
+

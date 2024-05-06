@@ -214,6 +214,7 @@ void WebServer::OnWrite_(HttpConn *client)
     if (client->ToWriteBytes() == 0) {
         /* 传输完成 */
         if (client->IsKeepAlive()) {
+            LOG_DEBUG("keep-alive in write");
             client->ReuseLink();
             OnProcess(client);
             return;

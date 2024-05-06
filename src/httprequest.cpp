@@ -27,6 +27,7 @@ bool HttpRequest::parse(Buffer& buff) {
     if(buff.ReadableBytes() <= 0) {
         return false;
     }
+    // LOG_DEBUG("[state = %d]", state_)
     while(state_ != FINISH) {
         if(buff.ReadableBytes() <= 0 && state_ != BODY) { return false;}
         const char* lineEnd = search(buff.Peek(), buff.BeginWriteConst(), CRLF, CRLF + 2);
@@ -112,9 +113,11 @@ void HttpRequest::ParseBody_(Buffer &buff) {
     }else{
         body_ = string(buff.Peek(), buff.ReadableBytes());
         buff.RetrieveAll();
+        LOG_DEBUG("No Content Length");
     }
     ParsePost_();
     state_ = FINISH;
+    // LOG_DEBUG("State: FINISH, buffer size:%d", buff.ReadableBytes());
     LOG_DEBUG("Body:%s, len:%d", body_.c_str(), body_.size());
 }
 
