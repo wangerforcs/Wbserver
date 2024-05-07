@@ -63,15 +63,6 @@
 因此我进行了修改，线程会从上一个线程解析之后的状态开始解析，这样就不会出现上述问题。
 但这样如何确定一个完整的http请求到哪里结束呢？好像以表单形式提交的POST请求，body部分也并没有结束符，但首部部分似乎有Content-Length字段。因此我主要对HttpConn::process和HttpRequest::parse进行了修改，解析parse的返回值代表是否完成整个请求的解析。
 
-
-### HTTP请求结束
-如何判断HTTP请求结束
-1. Content-Length 指明了请求体的长度，可以直接读取指定长度的数据
-2. Transfer-Encoding: chunked 数据要求为分块传输，格式为n\r\n数据\r\n，n为数据长度，n为0表示结束
-3. Connection: close 请求结束后关闭连接
-
-
-
 ## 新建数据库
 需要先配置好对应的数据库
 ```bash

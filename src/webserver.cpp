@@ -41,7 +41,7 @@ WebServer::~WebServer()
     close(listenFd_);
     isClose_ = true;
     free(srcDir_);
-    SqlConnPool::Instance()->ClosePool();
+    // SqlConnPool::Instance()->ClosePool();
 }
 
 void WebServer::InitEventMode_(int trigMode)
