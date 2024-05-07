@@ -36,16 +36,10 @@ void SqlConnPool::Init(const char* host, int port,
 
 MYSQL* SqlConnPool::GetConn() {
     MYSQL *sql = nullptr;
-    if(connQue_.empty()){
-        LOG_WARN("SqlConnPool busy!");
-        return nullptr;
-    }
     sem_wait(&semId_);
-    {
-        lock_guard<mutex> locker(mtx_);
-        sql = connQue_.front();
-        connQue_.pop();
-    }
+    lock_guard<mutex> locker(mtx_);
+    sql = connQue_.front();
+    connQue_.pop();
     return sql;
 }
 
